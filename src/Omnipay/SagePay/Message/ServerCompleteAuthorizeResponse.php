@@ -3,6 +3,7 @@
 namespace Omnipay\SagePay\Message;
 
 use Omnipay\Common\Message\RequestInterface;
+use Payum\Core\Reply\HttpResponse;
 
 /**
  * Sage Pay Server Complete Authorize Response
@@ -102,18 +103,6 @@ class ServerCompleteAuthorizeResponse extends Response
             $message .= "\r\nStatusDetail=".$detail;
         }
 
-        $this->exitWith($message);
-    }
-
-    /**
-     * Exit to ensure no other HTML, headers, comments, or text are included.
-     *
-     * @access private
-     * @codeCoverageIgnore
-     */
-    public function exitWith($message)
-    {
-        echo $message;
-        exit;
+        throw new HttpResponse($message, 200);
     }
 }

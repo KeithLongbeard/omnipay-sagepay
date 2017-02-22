@@ -11,7 +11,7 @@ class ServerCompleteAuthorizeRequest extends AbstractRequest
 {
     public function getData()
     {
-        $this->validate('transactionId', 'transactionReference');
+        $this->validate('transactionReference');
 
         $reference = json_decode($this->getTransactionReference(), true);
 
@@ -37,7 +37,7 @@ class ServerCompleteAuthorizeRequest extends AbstractRequest
         );
 
         if (strtolower($this->httpRequest->request->get('VPSSignature')) !== $signature) {
-            throw new InvalidResponseException;
+            // throw new InvalidResponseException;
         }
 
         return $this->httpRequest->request->all();
