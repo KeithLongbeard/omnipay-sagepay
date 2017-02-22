@@ -9,10 +9,10 @@ class ServerAuthorizeRequest extends DirectAuthorizeRequest
 {
     public function getData()
     {
-        $this->validate('returnUrl');
+        $this->validate('notifyUrl');
 
         $data = $this->getBaseAuthorizeData();
-        $data['NotificationURL'] = $this->getReturnUrl();
+        $data['NotificationURL'] = $this->getNotifyUrl();
 
         return $data;
     }

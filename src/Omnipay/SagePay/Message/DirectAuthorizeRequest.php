@@ -15,40 +15,45 @@ class DirectAuthorizeRequest extends AbstractRequest
 
     protected function getBaseAuthorizeData()
     {
-        $this->validate('amount', 'card', 'transactionId');
+        //$this->validate('amount', 'card', 'transactionId');
         $card = $this->getCard();
 
         $data = $this->getBaseData();
         $data['Description'] = $this->getDescription();
         $data['Amount'] = $this->getAmount();
         $data['Currency'] = $this->getCurrency();
-        $data['VendorTxCode'] = $this->getTransactionId();
+        $data['VendorTxCode'] = rand(10000,999999);
         $data['ClientIPAddress'] = $this->getClientIp();
-        $data['ApplyAVSCV2'] = 0; // use account setting
-        $data['Apply3DSecure'] = 0; // use account setting
+        $data['ApplyAVSCV2'] = 0;
+        $data['Apply3DSecure'] = 0;
+        $data['NotificationURL'] = $this->getNotifyUrl();
+
+
+        $data['ReferrerID'] = 'Main';
+
 
         // billing details
-        $data['BillingFirstnames'] = $card->getFirstName();
-        $data['BillingSurname'] = $card->getLastName();
-        $data['BillingAddress1'] = $card->getBillingAddress1();
-        $data['BillingAddress2'] = $card->getBillingAddress2();
-        $data['BillingCity'] = $card->getBillingCity();
-        $data['BillingPostCode'] = $card->getBillingPostcode();
-        $data['BillingState'] = $card->getBillingCountry() === 'US' ? $card->getBillingState() : null;
-        $data['BillingCountry'] = $card->getBillingCountry();
-        $data['BillingPhone'] = $card->getBillingPhone();
+        $data['BillingFirstnames'] = 'Nolan';
+        $data['BillingSurname'] = 'Cain';
+        $data['BillingAddress1'] = '36 Baker Street';
+        $data['BillingAddress2'] = '';
+        $data['BillingCity'] = 'London';
+        $data['BillingPostCode'] = 'WC1H 8EA';
+        $data['BillingState'] = '';
+        $data['BillingCountry'] = 'GB';
+        $data['BillingPhone'] = '';
 
         // shipping details
-        $data['DeliveryFirstnames'] = $card->getFirstName();
-        $data['DeliverySurname'] = $card->getLastName();
-        $data['DeliveryAddress1'] = $card->getShippingAddress1();
-        $data['DeliveryAddress2'] = $card->getShippingAddress2();
-        $data['DeliveryCity'] = $card->getShippingCity();
-        $data['DeliveryPostCode'] = $card->getShippingPostcode();
-        $data['DeliveryState'] = $card->getShippingCountry() === 'US' ? $card->getShippingState() : null;
-        $data['DeliveryCountry'] = $card->getShippingCountry();
-        $data['DeliveryPhone'] = $card->getShippingPhone();
-        $data['CustomerEMail'] = $card->getEmail();
+        $data['DeliveryFirstnames'] = 'Nolan';
+        $data['DeliverySurname'] = 'Cain';
+        $data['DeliveryAddress1'] = '36 Baker Street';
+        $data['DeliveryAddress2'] = '';
+        $data['DeliveryCity'] = 'London';
+        $data['DeliveryPostCode'] = 'WC1H 8EA';
+        $data['DeliveryState'] = '';
+        $data['DeliveryCountry'] = 'GB';
+        $data['DeliveryPhone'] = '';
+        $data['CustomerEMail'] = 'nono@theodo.co.uk';
 
         return $data;
     }
