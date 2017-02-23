@@ -30,28 +30,29 @@ class DirectAuthorizeRequest extends AbstractRequest
 
         $data['ReferrerID'] = 'Main';
 
+        $shippingAddress = $this->getShippingAddress();
+
         // billing details
-        $data['BillingFirstnames'] = 'Nolan';
-        $data['BillingSurname'] = 'Cain';
-        $data['BillingAddress1'] = '36 Baker Street';
+        $data['BillingFirstnames'] = $shippingAddress->getFirstName();
+        $data['BillingSurname'] = $shippingAddress->getLastName();
+        $data['BillingAddress1'] = $shippingAddress->getStreet();
         $data['BillingAddress2'] = '';
-        $data['BillingCity'] = 'London';
-        $data['BillingPostCode'] = 'WC1H 8EA';
-        $data['BillingState'] = '';
-        $data['BillingCountry'] = 'GB';
-        $data['BillingPhone'] = '';
+        $data['BillingCity'] = $shippingAddress->getCity();
+        $data['BillingPostCode'] = $shippingAddress->getPostcode();
+        $data['BillingState'] = $shippingAddress->getProvinceName();
+        $data['BillingCountry'] = $shippingAddress->getCountryCode();
+        $data['BillingPhone'] = $shippingAddress->getPhoneNumber();
 
         // shipping details
-        $data['DeliveryFirstnames'] = 'Nolan';
-        $data['DeliverySurname'] = 'Cain';
-        $data['DeliveryAddress1'] = '36 Baker Street';
+        $data['DeliveryFirstnames'] = $shippingAddress->getFirstName();
+        $data['DeliverySurname'] = $shippingAddress->getLastName();
+        $data['DeliveryAddress1'] = $shippingAddress->getStreet();
         $data['DeliveryAddress2'] = '';
-        $data['DeliveryCity'] = 'London';
-        $data['DeliveryPostCode'] = 'WC1H 8EA';
-        $data['DeliveryState'] = '';
-        $data['DeliveryCountry'] = 'GB';
-        $data['DeliveryPhone'] = '';
-        $data['CustomerEMail'] = 'nono@theodo.co.uk';
+        $data['DeliveryCity'] = $shippingAddress->getCity();
+        $data['DeliveryPostCode'] = $shippingAddress->getPostcode();
+        $data['DeliveryState'] = $shippingAddress->getProvinceName();
+        $data['DeliveryCountry'] = $shippingAddress->getCountryCode();
+        $data['DeliveryPhone'] = $shippingAddress->getPhoneNumber();
 
         $basketXML = $this->getItemData();
         if (!empty($basketXML)) {

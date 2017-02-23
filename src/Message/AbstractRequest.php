@@ -12,6 +12,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected $liveEndpoint = 'https://live.sagepay.com/gateway/service';
     protected $testEndpoint = 'https://test.sagepay.com/gateway/service';
 
+    public function getShippingAddress()
+    {
+        return $this->getParameter('shippingAddress');
+    }
+
+    public function setShippingAddress($value)
+    {
+        return $this->setParameter('shippingAddress', $value);
+    }
+
     public function getVendor()
     {
         return $this->getParameter('vendor');
