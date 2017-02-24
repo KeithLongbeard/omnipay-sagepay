@@ -22,7 +22,11 @@ class ServerAuthorizeRequest extends DirectAuthorizeRequest
         $this->validate('notifyUrl');
 
         $data = $this->getBaseAuthorizeData();
-        $data['NotificationURL'] = $this->getNotifyUrl();
+        $httpHost = $_SERVER['HTTP_HOST'];
+        $httpPrefix = (substr($httpHost, -strlen('com')) === 'com') ? 'https' : 'http';
+        $notifyUrl = $this->getNotifyUrl();
+        $customNotifyUrl = str_replace('http', $httpPrefix, $notifyUrl);
+        $data['NotificationURL'] = $customNotifyUrl;
         $data['Profile'] = $this->getProfile();
 
         return $data;
