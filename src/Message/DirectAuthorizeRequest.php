@@ -22,7 +22,7 @@ class DirectAuthorizeRequest extends AbstractRequest
         $data['Description'] = $this->getDescription();
         $data['Amount'] = $this->getAmount();
         $data['Currency'] = $this->getCurrency();
-        $data['VendorTxCode'] = rand(10000,999999);
+        $data['VendorTxCode'] = $this->getTransactionId();
         $data['ClientIPAddress'] = $this->getClientIp();
         $data['ApplyAVSCV2'] = 0;
         $data['Apply3DSecure'] = 0;
