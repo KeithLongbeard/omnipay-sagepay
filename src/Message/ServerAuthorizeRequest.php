@@ -11,6 +11,7 @@ class ServerAuthorizeRequest extends DirectAuthorizeRequest
     {
         // todo: get this working with parameters...
         return "LOW"; //$this->getParameter('profile');
+        
     }
 
     public function setProfile($value)
