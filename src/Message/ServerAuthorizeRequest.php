@@ -9,7 +9,7 @@ class ServerAuthorizeRequest extends DirectAuthorizeRequest
 {
     public function getProfile()
     {
-        return $this->getParameter('profile');
+        return "LOW"; //$this->getParameter('profile');
     }
 
     public function setProfile($value)
@@ -23,10 +23,10 @@ class ServerAuthorizeRequest extends DirectAuthorizeRequest
 
         $data = $this->getBaseAuthorizeData();
         $httpHost = $_SERVER['HTTP_HOST'];
-        $httpPrefix = (substr($httpHost, -strlen('com')) === 'com') ? 'https' : 'http';
+        $httpPrefix = 'http'; //(substr($httpHost, -strlen('com')) === 'com') ? 'https' : 'http';
         $notifyUrl = $this->getNotifyUrl();
         $customNotifyUrl = str_replace('http', $httpPrefix, $notifyUrl);
-        $data['NotificationURL'] = $customNotifyUrl;
+        $data['NotificationURL'] =  $customNotifyUrl;
         $data['Profile'] = $this->getProfile();
 
         return $data;
